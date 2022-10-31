@@ -1,0 +1,54 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>Employees</title>
+    <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+</HEAD>
+<body>
+<div th:replace="common/navbar :: common-navbar"></div>
+
+
+<div class="container">
+    <h4>Office list</h4>
+    <hr>
+    <a th:href="@{/office/add}" class="btn btn-primary btn-sm mb-3">Add office</a>
+    <div class="row">
+
+        <!-- <h4 th:if="${#strings.toString(param.val)} == 'abc'">SOME-TEXT-1</h4>!-->
+
+        <div th:if="${#strings.toString(param.msg)} == 'error'" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Warning!</strong> The operation was failed
+            <small th:text="${param.errorName}"></small>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div th:if="${#strings.toString(param.msg)} == 'success'" class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Awesome!</strong> The operation was succeed
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Dimension</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="office:${officeList}">
+                <td th:text="${office.name}"></td>
+                <td th:text="${office.location}"></td>
+                <td th:text="${office.dimension}"></td>
+                <td><a class="btn btn-info" th:href="@{/office/edit/{id} (id=${office.id})}">Modify</a>
+                <a class="btn btn-danger" th:href="@{/office/delete/{id} (id=${office.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <base href="/">
+    <title>Employees</title>
+    <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+</HEAD>
+<body>
+<div th:replace="common/navbar :: common-navbar"></div>
+<div class="container">
+    <h3>Add office</h3>
+    <hr>
+    <div class="row col-md-6 offset-md-3">
+        <form th:action="@{/office/save}" th:object="${office}" method="post">
+            <div class="form-group">
+                <label for="name" class="label-group">Name : </label>
+                <input type="text" class="form-control" id="name" name="name" required th:field="*{name}">
+            </div>
+            <div class="form-group">
+                <label for="location" class="label-group">Location : </label>
+                <input type="text" class="form-control" id="location" name="location" required th:field="*{location}">
+            </div>
+            <div class="form-group">
+                <label for="dimension" class="label-group">Dimension : </label>
+                <input type="number" class="form-control" id="dimension" name="dimension" required
+                       th:field="*{dimension}">
+            </div>
+            <button class="btn btn-success mt-2 float-end" type="submit">Add</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
